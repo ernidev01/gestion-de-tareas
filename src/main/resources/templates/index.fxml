@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Vista principal del Sistema de Gestión de Tareas.
+    Controlador asociado: ernidev.tareas.controlador.IndexControlador
+
+    Estructura de la vista:
+    - Título del sistema en la parte superior
+    - Formulario de entrada (Responsable, Tarea, Estatus) en la parte izquierda
+    - Tabla de tareas (Id, Tarea, Responsable, Estatus) en la parte derecha
+    - Barra de botones (Agregar, Modificar, Eliminar, Limpiar) en la parte inferior
+
+    Autor: Erick Gonzalez
+    Versión: 1.0
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<!-- Contenedor raíz de la vista con dimensiones de 720x542 px -->
+<AnchorPane prefHeight="542.0" prefWidth="720.0"
+            xmlns="http://javafx.com/javafx/26"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ernidev.tareas.controlador.IndexControlador">
+    <children>
+
+        <!-- Título principal de la aplicación -->
+        <Label alignment="TOP_LEFT" layoutX="209.0" layoutY="33.0"
+               nodeOrientation="RIGHT_TO_LEFT"
+               text="Sistema de tareas" textFill="#4863f8">
+            <font>
+                <!-- Fuente Verdana Bold Italic a 30px para el título -->
+                <Font name="Verdana Bold Italic" size="30.0"/>
+            </font>
+        </Label>
+
+        <!--
+            Tabla principal de tareas.
+            Al hacer clic en una fila, llama a #cargarTarea en el controlador
+            para poblar el formulario con los datos de la tarea seleccionada.
+        -->
+        <TableView fx:id="tareaTabla"
+                   layoutX="342.0" layoutY="171.0"
+                   onMouseClicked="#cargarTarea"
+                   prefHeight="200.0" prefWidth="341.0">
+            <columns>
+                <!-- Columna del identificador único de la tarea -->
+                <TableColumn fx:id="idTareaColumna" prefWidth="75.0" text="Id"/>
+
+                <!-- Columna del nombre de la tarea -->
+                <TableColumn fx:id="nombreColumnaTarea" prefWidth="75.0" text="Tarea"/>
+
+                <!-- Columna del responsable asignado a la tarea -->
+                <TableColumn fx:id="resposnsableColumna" prefWidth="75.0" text="Responsable"/>
+
+                <!-- Columna del estatus actual de la tarea -->
+                <TableColumn fx:id="estatusColumna" prefWidth="75.0" text="Estatus"/>
+            </columns>
+        </TableView>
+
+        <!--
+            Formulario de entrada de datos.
+            Contiene los campos para ingresar o editar Responsable, Tarea y Estatus.
+            Los TextField están vinculados mediante fx:id al controlador.
+        -->
+        <AnchorPane layoutX="81.0" layoutY="171.0"
+                    prefHeight="200.0" prefWidth="200.0">
+            <children>
+                <!-- Etiqueta del campo Responsable -->
+                <Label layoutX="23.0" layoutY="29.0" text="Responsable"/>
+
+                <!-- Etiqueta del campo Tarea -->
+                <Label layoutX="24.0" layoutY="92.0" text="Tarea"/>
+
+                <!-- Etiqueta del campo Estatus -->
+                <Label layoutX="19.0" layoutY="146.0" text="Estatus"/>
+
+                <!-- Campo de texto para ingresar el responsable de la tarea -->
+                <TextField fx:id="responsableTexto" layoutX="26.0" layoutY="46.0"/>
+
+                <!-- Campo de texto para ingresar el nombre de la tarea -->
+                <TextField fx:id="nombreTareaTexto" layoutX="26.0" layoutY="109.0"/>
+
+                <!-- Campo de texto para ingresar el estatus de la tarea -->
+                <TextField fx:id="estatusTexto" layoutX="16.0" layoutY="163.0"/>
+            </children>
+        </AnchorPane>
+
+        <!--
+            Barra de acciones inferior.
+            Contiene los botones que invocan los métodos del controlador
+            para gestionar las operaciones CRUD sobre las tareas.
+        -->
+        <AnchorPane layoutX="72.0" layoutY="462.0"
+                    prefHeight="66.0" prefWidth="617.0">
+            <children>
+                <!-- Botón para agregar una nueva tarea; invoca #agregarTarea -->
+                <Button fx:id="agrgarBtn"
+                        layoutX="48.0" layoutY="21.0"
+                        mnemonicParsing="false"
+                        onAction="#agregarTarea"
+                        text="Agregar"/>
+
+                <!-- Botón para modificar la tarea seleccionada; invoca #modificarTarea -->
+                <Button fx:id="modificarBtn"
+                        layoutX="187.0" layoutY="21.0"
+                        mnemonicParsing="false"
+                        onAction="#modificarTarea"
+                        text="Modificar"/>
+
+                <!-- Botón para eliminar la tarea seleccionada; invoca #eliminarTarea -->
+                <Button fx:id="eliminarBtn"
+                        layoutX="337.0" layoutY="21.0"
+                        mnemonicParsing="false"
+                        onAction="#eliminarTarea"
+                        text="Eliminar"/>
+
+                <!-- Botón para limpiar los campos del formulario -->
+                <Button fx:id="limpiarBtn"
+                        layoutX="471.0" layoutY="21.0"
+                        mnemonicParsing="false"
+                        text="Limpiar Formulario"/>
+            </children>
+        </AnchorPane>
+
+    </children>
+</AnchorPane>
